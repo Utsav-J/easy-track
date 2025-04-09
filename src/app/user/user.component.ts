@@ -1,5 +1,5 @@
 import { Component, computed, EventEmitter, input, Input, Output} from '@angular/core';
-
+import { User } from './user.model';
 
 @Component({
   selector: 'app-user',
@@ -9,20 +9,17 @@ import { Component, computed, EventEmitter, input, Input, Output} from '@angular
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  @Input({required:true}) id!:string;
-  @Input({required: true}) name!: string;
-  // avatar = input.required<string>();
-  @Input({required:true}) avatar! : string;
-  // name = input.required<string>();
+  @Input({required: true}) user!:User;
+  @Input({required:true }) selected!:boolean;
   @Output() select= new EventEmitter<string>();
   
   get imagePath(){
-    return "assets/users/"+this.avatar;
+    return "assets/users/"+this.user.avatar;
     // imagePath = computed(()=>{return "assets/users/"+ this.avatar()});
   } 
 
   public onSelectUser(){
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
     console.log("Clicked");
   }
 }
